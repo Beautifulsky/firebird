@@ -6,6 +6,13 @@
       SQL> commit;
       SQL> exit;
 2、增加一个用户：
-gsec –user sysdba –pass masterkey –add zhangsan –pw ab123
+    gsec –user sysdba –pass masterkey –add zhangsan –pw ab123
 增加了用户为zhangsan密码为ab123。
 注意：密码是区分大小写的。
+或者进入到sysdba创建的数据库，用下面的代码来新建用户；
+    create user billyboy password 'TooLongFor8099Comfort'
+3、创建数据库
+SQL>create database 'D:\data\test.fdb' page_size 8192↵
+CON>user 'sysdba' password 'masterkey';↵
+4、连接数据库
+SQL> connect G:\database\Assembly.fdb user 'admin' password 'admin';
