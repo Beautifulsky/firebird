@@ -12,7 +12,14 @@
 或者进入到sysdba创建的数据库，用下面的代码来新建用户；
     create user billyboy password 'TooLongFor8099Comfort'
 3、创建数据库
-SQL>create database 'D:\data\test.fdb' page_size 8192↵
-CON>user 'sysdba' password 'masterkey';↵
+    SQL>create database 'D:\data\test.fdb' page_size 8192↵
+    CON>user 'sysdba' password 'masterkey';↵
 4、连接数据库
-SQL> connect G:\database\Assembly.fdb user 'admin' password 'admin';
+    SQL> connect G:\database\Assembly.fdb user 'admin' password 'admin';
+5授予权限（第一个命令创建用户bigbill作为Firebird管理员，可以添加，更改和删除用户。 第二个命令为现有用户littlejohn授予管理员权限。 ）
+    create user username password 'bigsekrit7foryou' grant admin role;
+    alter user littlejohn grant admin role;
+    grant create table to user username;授予用户创建表的权限(create 换成all，是所有权限)
+6 删除表
+    drop table tablename;
+    
