@@ -1,4 +1,5 @@
 1、改变用户密码：在firebird目录的cmd下运行下面的语句（gsec -help）
+    gsec -user sysdba -password ddmxjtu 进行登陆
     gsec –user sysdba –pass masterkey –mo sysdba –pw abc1234      （mo值modify）注意这个修改的是整个数据库的sysdba的密码。
     以用户为sysdab，密码为masterkey认证用户，-mo[dify]参数改变用户sysdba的密码为abc1234。
 登陆到创建的数据库可以使用下面代码来修改sysdba的密码。
@@ -22,4 +23,21 @@
     grant create table to user username;授予用户创建表的权限(create 换成all，是所有权限)
 6 删除表
     drop table tablename;
-    
+7 firebird 创建自增长id
+    public void CreateTrigger(string generatorName,string triggerName,string tableName,string idName)
+        {
+            MyOpen();
+            //先创建generate 增长序列
+            FbCommand fbcmdCreateIndex = fbConn.CreateCommand();
+            fbcmdCreateIndex.CommandText = "CREATE GENERATOR "+ generatorName + ";";
+            fbcmdCreateIndex.ExecuteNonQuery();
+            string cmdtext = null;
+            //在创建触发器，在插入时+1
+            cmdtext += "CREATE TRIGGER " + triggerName + " FOR " + tableName + " active before insert position 0 as begin if(new." + idName + " is null) then new." + idName + " = gen_id(" + generatorName + ",1);end" + ";";
+            fbcmdCreateIndex.CommandText = cmdtext;
+            fbcmdCreateIndex.ExecuteNonQuery();
+            fbcmdCreateIndex.Dispose();
+            MyClose();
+        }
+        需要注意的是，需要给用户授予使用权限
+        grant usage on sequence 序列名 to userName;
