@@ -41,3 +41,49 @@
         }
         需要注意的是，需要给用户授予使用权限
         grant usage on sequence 序列名 to userName;
+8.	DataGridView
+选中一行设置
+dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+返回选中行某列的值（第三个值）
+string str = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+得到选中行的索引
+int intRow = dataGridView1.SelectedCells[0].RowIndex;
+得到列的索引
+int intColumn = dataGridView1.SelectedCells[0].ColumnIndex;
+
+9.	DataSet查看返回结果集
+DataSet.Tables.Count值为返回的表的数量。
+ds.Tables[0].Rows.Count的值为第一个表数据的条数。
+ds.Tables[0].Rows[0].ItemArray[0]为第一个表，第一条数据的第一个值。
+ds.Tables[0].Rows.Count<=0 判断查询的结果为空
+遍历Dataset
+//遍历所有的datatable
+ foreach (DataTable dt in YourDataset.Tables) 
+{
+		foreach (DataRow dr in dt.Rows) ///遍历所有的行
+       foreach (DataColumn dc in dt.Columns) //遍历所有的列
+        Console.WriteLine(“{ 0}, { 1}, { 2}”, dt.TableName, dc.ColumnName, dr[dc]); //表名,列名,单元格数据
+
+}
+//遍历一个表多行多列
+foreach (DataRow mDr in dataSet.Tables[0].Rows) 
+{
+		foreach (DataColumn mDc in dataSet.Tables[0].Columns)
+		{
+			 Console.WriteLine(mDr[mDc].ToString());
+}
+}
+//遍历一个表多行一列
+foreach (DataRow row in DataSet1.Tables[0].Rows)
+{
+		Console.WriteLine(row[0].ToString());
+}
+//一行一列
+ds.Tables[0].Rows[0]["字段"];
+//访问一行中的某个元素
+ dr.ItemArray[i].ToString();
+
+10.	数据库事务
+https://blog.csdn.net/hemeinvyiqiluoben/article/details/41145907
+https://www.cnblogs.com/hyjj/p/5337726.html
+https://blog.csdn.net/hemeinvyiqiluoben/article/details/41082305
