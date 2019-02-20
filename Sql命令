@@ -87,3 +87,7 @@ ds.Tables[0].Rows[0]["字段"];
 https://blog.csdn.net/hemeinvyiqiluoben/article/details/41145907
 https://www.cnblogs.com/hyjj/p/5337726.html
 https://blog.csdn.net/hemeinvyiqiluoben/article/details/41082305
+
+11数据库的备份与恢复
+备份 gbak -user sysdba -password ddmxjtu -backup  -E -verify G:\database\assembly.FDB G:\database\12\assembly.fdb
+恢复gbak -user sysdba -password ddmxjtu -replace -verify G:\database\12\assembly.fdb D:\01_软件开发\C#商发\AssemblyAnslysis\AssemblyAnslysis\bin\x86\Debug\assembly.fdb
